@@ -64,6 +64,10 @@ class Access_UA {
 		'Spider',
 		'Python-urllib', // Python-urllib 库
 		'Python-requests', // Python-Requests 库
+		'DNSPod-Monitor', // DNSPod D监控
+		'Reeder', // RSS 阅读器
+		'Tiny Tiny RSS', // RSS 阅读器
+		'inoreader', // RSS 阅读器
 	);
 
 	private static $robotscn = array(
@@ -343,8 +347,11 @@ class Access_UA {
 			} elseif (preg_match('#Maxthon( |\/)([a-zA-Z0-9.]+)#i', $this->ua, $matches)) {
 				$this->browserID = $this->browserName = 'Maxthon';
 				$this->browserVersion = $matches[2];
-			} elseif (preg_match('#Edge/([a-zA-Z0-9.]+)#i', $this->ua, $matches)) {
-				$this->browserID = $this->browserName = 'Microsoft Edge';
+			} elseif (preg_match('#XiaoMi/MiuiBrowser/([0-9.]+)#i', $this->ua, $matches)) {
+				$this->browserID = $this->browserName = '小米浏览器';
+				$this->browserVersion = $matches[1];
+			} elseif (preg_match('#Safari/([a-zA-Z0-9.]+)#i', $this->ua, $matches)) {
+				$this->browserID = $this->browserName = 'Safari';
 				$this->browserVersion = $matches[1];
 			} 
 			// Chrome 内核
