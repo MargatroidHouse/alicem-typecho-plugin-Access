@@ -107,11 +107,25 @@ class Access_Core
             $ua = new Access_UA($row['ua']);
             if ($ua->isRobot()) {
                 $name = $ua->getRobotID();
+                $name .= ($ua->getRobotCNName($name) != "") ? "（" . $ua->getRobotCNName($name) . "）" : "";
                 $version = $ua->getRobotVersion();
+                $os = "";
             } else {
                 $name = $ua->getBrowserName();
                 $version = $ua->getBrowserVersion();
+                $os_id = $ua->getOSName();
+                $os_version = $ua->getOSVersion();
+                if($os_id != "")
+                {
+                    $os = $os_id ;
+                    $os .= ($os_version != "") ? " " . $os_version  : "";
+                }
+                else
+                {
+                    $os = "";
+                }
             }
+            $row['osinfo'] = $os;
             if ($name == '') {
                 $row['display_name'] = _t('未知');
             } elseif ($version == '') {
@@ -399,7 +413,6 @@ class Access_Core
             'robot_id' => $this->ua->getRobotID(),
             'robot_version' => $this->ua->getRobotVersion(),
         );
-
         try {
             $this->db->query($this->db->insert('table.access_log')->rows($rows));
         } catch (Exception $e) {} catch (Typecho_Db_Query_Exception $e) {}
