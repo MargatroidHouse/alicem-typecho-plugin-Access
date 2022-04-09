@@ -350,9 +350,6 @@ class Access_UA {
 			} elseif (preg_match('#XiaoMi/MiuiBrowser/([0-9.]+)#i', $this->ua, $matches)) {
 				$this->browserID = $this->browserName = '小米浏览器';
 				$this->browserVersion = $matches[1];
-			} elseif (preg_match('#Safari/([a-zA-Z0-9.]+)#i', $this->ua, $matches)) {
-				$this->browserID = $this->browserName = 'Safari';
-				$this->browserVersion = $matches[1];
 			} 
 			// Chrome 内核
 			elseif (preg_match('#Chrome/([a-zA-Z0-9.]+)#i', $this->ua, $matches)) {
